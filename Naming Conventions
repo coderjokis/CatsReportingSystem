@@ -1,0 +1,5 @@
+Classes should begin in capitalized letter, multiple words will follow as camel casing.
+Paramaters will be lower case.
+Name objects descriptively.
+Leave comment descriptions on for loops decribing what they are doing.
+Do not leave a code hanging.
