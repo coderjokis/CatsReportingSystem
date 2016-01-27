@@ -21,13 +21,14 @@ namespace CatsReportingSystem
         private void LoadUser(ListControl l)
         {
             DAL myDal = new DAL();
+            
             l.DataSource = myDal.ExecuteProcedure("spGetUser");
             l.DataTextField = "UserName";
             l.DataValueField = "UserID";
             l.DataBind();
-            if(l is DropDownList)
+            if (l is DropDownList)
             {
-                l.Items.Insert(0, new ListItem("Select Coucilor Name..."));
+                l.Items.Insert(0, new ListItem("Select Councilor Name..."));
             }
             lblUserAccount.Text = ddlUser.SelectedValue;
         }

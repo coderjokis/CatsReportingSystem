@@ -6,7 +6,7 @@ go
 
 alter procedure spGetUser
 as begin
-	select * from tblUsers
+	select UserID,UserName from tblUsers where UserName!='zInvalid'
 end
 go
 exec spGetUser
