@@ -20,19 +20,6 @@ namespace CatsReportingSystem
 
         private void LoadUser(ListControl l)
         {
-            //DAL d = new DAL();
-            //l.DataSource = d.ExecuteProcedure("spGetGenders");
-            //l.DataTextField = "GenderName";
-            //l.DataValueField = "GenderId";
-            //l.DataBind();
-            //if (l is DropDownList)
-            //{
-            //    l.Items.Insert(0, new ListItem("Select a Gender...", "-1"));
-            //}
-
-
-
-
             DAL myDal = new DAL();
             l.DataSource = myDal.ExecuteProcedure("spGetUser");
             l.DataTextField = "UserName";

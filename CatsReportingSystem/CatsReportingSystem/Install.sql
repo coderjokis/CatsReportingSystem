@@ -4,11 +4,9 @@ go
 select * from tblUsers
 go
 
-create procedure spGetUser
-(@UserID int = null)
-if exists (select UserName from tblUsers)
+alter procedure spGetUser
 as begin
-	select * from tblUsers where UserID = ISNULL(@UserID,UserID)
+	select * from tblUsers
 end
 go
 exec spGetUser
