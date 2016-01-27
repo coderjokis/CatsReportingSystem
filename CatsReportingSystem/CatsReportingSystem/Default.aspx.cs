@@ -28,7 +28,7 @@ namespace CatsReportingSystem
             l.DataBind();
             if (l is DropDownList)
             {
-                l.Items.Insert(0, new ListItem("Select Coucilor Name..."));
+                l.Items.Insert(0, new ListItem("Select Councilor Name..."));
             }
             txtUserAccount.Text = ddlUser.SelectedValue;
         }
