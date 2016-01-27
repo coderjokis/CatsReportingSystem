@@ -13,19 +13,35 @@ namespace CatsReportingSystem
 {
     public partial class _Default : Page
     {
-        string conn=ConfigurationManager.ConnectionStrings["ConnToAlan"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadUser();
+            LoadUser(ddlUser);
         }
 
-        private void LoadUser()
+        private void LoadUser(ListControl l)
         {
-            DAL myDal = new DAL(conn);
-            DataSet ds = myDal.ExecuteProcedure("spGetUser"); 
-            ddlUser.DataSource = (string) ds.Tables[0].Rows[0]["UserName"];
-            ddlUser.DataBind();
+            //DAL d = new DAL();
+            //l.DataSource = d.ExecuteProcedure("spGetGenders");
+            //l.DataTextField = "GenderName";
+            //l.DataValueField = "GenderId";
+            //l.DataBind();
+            //if (l is DropDownList)
+            //{
+            //    l.Items.Insert(0, new ListItem("Select a Gender...", "-1"));
+            //}
 
+
+
+
+            DAL myDal = new DAL();
+            l.DataSource = myDal.ExecuteProcedure("spGetUser");
+            l.DataTextField = "UserName";
+            l.DataValueField = "UserID";
+            l.DataBind();
+            if(l is DropDownList)
+            {
+                l.Items.Insert(0, new ListItem("Select Coucilor Name..."));
+            }
             txtUserAccount.Text = ddlUser.SelectedValue;
         }
     }
