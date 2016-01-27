@@ -6,6 +6,7 @@ go
 
 create procedure spGetUser
 (@UserID int = null)
+if exist (select UserName from tblUsers)
 as begin
 	select * from tblUsers where UserID = ISNULL(@UserID,UserID)
 end

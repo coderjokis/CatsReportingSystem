@@ -22,9 +22,8 @@ namespace CatsReportingSystem
         private void LoadUser()
         {
             DAL myDal = new DAL(conn);
-            DataSet ds = myDal.ExecuteProcedure("spGetUser");
-            SqlDataAdapter da = new SqlDataAdapter();
-            ddlUser.DataSource = ds.Tables[0].Rows[0]["UserName"].ToString();
+            DataSet ds = myDal.ExecuteProcedure("spGetUser"); 
+            ddlUser.DataSource = (string) ds.Tables[0].Rows[0]["UserName"];
             ddlUser.DataBind();
 
             txtUserAccount.Text = ddlUser.SelectedValue;
