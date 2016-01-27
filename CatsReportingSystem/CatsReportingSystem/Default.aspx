@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <asp:DropDownList ID="ddlUser" runat="server"></asp:DropDownList>
-        <asp:TextBox ID="txtUserAccount" runat="server"></asp:TextBox>
+        <asp:Label ID="lblUserAccount" runat="server" ></asp:Label>
     </div>
 
 </asp:Content>

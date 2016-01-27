@@ -29,7 +29,7 @@ namespace CatsReportingSystem
             {
                 l.Items.Insert(0, new ListItem("Select Coucilor Name..."));
             }
-            txtUserAccount.Text = ddlUser.SelectedValue;
+            lblUserAccount.Text = ddlUser.SelectedValue;
         }
     }
 }
