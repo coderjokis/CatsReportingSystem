@@ -15,21 +15,7 @@ namespace CatsReportingSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadUser(ddlUser);
-        }
-
-        private void LoadUser(ListControl l)
-        {
-            DAL myDal = new DAL();
             
-            l.DataSource = myDal.ExecuteProcedure("spGetUser");
-            l.DataTextField = "UserName";
-            l.DataValueField = "UserID";
-            l.DataBind();
-            if (l is DropDownList)
-            {
-                l.Items.Insert(0, new ListItem("Select Councilor Name..."));
-            }
         }
     }
 }
