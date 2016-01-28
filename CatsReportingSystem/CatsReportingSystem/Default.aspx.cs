@@ -31,10 +31,5 @@ namespace CatsReportingSystem
                 l.Items.Insert(0, new ListItem("Select Councilor Name..."));
             }
         }
-
-        protected void btnSelect_Click(object sender, EventArgs e)
-        {
-            lblUserAccount.Text = ddlUser.SelectedValue;
-        }
     }
 }
