@@ -21,7 +21,6 @@ namespace CatsReportingSystem
         private void Loadtext()
         {
             string userName = HttpContext.Current.User.Identity.Name;
-            txtUsername.Text = HttpUtility.UrlDecode(Request.QueryString[userName]);
         }
     }
 }
