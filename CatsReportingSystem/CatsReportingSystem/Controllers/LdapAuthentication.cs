@@ -11,16 +11,18 @@ namespace CatsReportingSystem.Controllers
     {
         private string _path;
         private string _filterAttribute;
+        string DomainAndUsername = HttpContext.Current.User.Identity.Name;
+        private string username;
 
         public LdapAuthentication(string path)
         {
             _path = path;
         }
 
-        public bool IsAuthenticated(string domain, string username, string pwd)
+        public bool IsAuthenticated(string domainAndUsername, string pwd)
         {
-            string domainAndUsername = domain + @"\" + username;
-            DirectoryEntry entry = new DirectoryEntry(_path, domainAndUsername, pwd);
+            
+            DirectoryEntry entry = new DirectoryEntry(_path, DomainAndUsername, pwd);
 
             try
             {

@@ -15,7 +15,13 @@ namespace CatsReportingSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Loadtext();
+        }
+
+        private void Loadtext()
+        {
+            string userName = HttpContext.Current.User.Identity.Name;
+            txtUsername.Text = HttpUtility.UrlDecode(Request.QueryString[userName]);
         }
     }
 }
