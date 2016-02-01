@@ -86,7 +86,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> -Center for Aboriginal Human Resources and Development</p>
+                <p>&copy; <%: DateTime.Now.Year %> -Center for Aboriginal Human Resource and Development</p>
             </footer>
         </div>
 
