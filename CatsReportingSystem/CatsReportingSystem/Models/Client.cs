@@ -12,7 +12,7 @@ namespace CatsReportingSystem.Models
         public string LastName { get; set; }
         public int SIN { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public bool IsActive { get; set; }
+        public bool Status { get; set; }
 
         public Client(int clientID, string firstName, string lastName, int sIN, DateTime dateOfBirth, bool isActive)
         {
@@ -21,7 +21,7 @@ namespace CatsReportingSystem.Models
             this.LastName = lastName;
             this.SIN = sIN;
             this.DateOfBirth = dateOfBirth;
-            this.IsActive = isActive;
+            this.Status = isActive;
         }
     }
 }
