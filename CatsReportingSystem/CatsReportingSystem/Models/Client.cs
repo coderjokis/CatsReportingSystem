@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DAL_Project;
+using System.Data;
 
 namespace CatsReportingSystem.Models
 {
@@ -22,6 +24,11 @@ namespace CatsReportingSystem.Models
             this.SIN = sIN;
             this.DateOfBirth = dateOfBirth;
             this.Status = isActive;
+        }
+        public void ClientSearch()
+        {
+            DAL myDal = new DAL();
+            DataSet ds = myDal.ExecuteProcedure("spGetClientBySearch");
         }
     }
 }
