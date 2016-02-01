@@ -50,12 +50,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/"><span class="glyphicon glyphicon-search"></span></a></li>
                         <li><a runat="server" href="~/User/User">User</a></li>
                         <li><a runat="server" href="~/Client/Client">Client</a></li>
                         <li><a runat="server" href="~/Admin/Admin">Admin</a></li>
                     </ul>
-                    <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search"></span></button>
+                    
                     <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server"/>! </p>
                 </div>
             </div>
