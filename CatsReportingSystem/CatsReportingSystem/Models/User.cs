@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace CatsReportingSystem.Models
 {
@@ -9,7 +10,12 @@ namespace CatsReportingSystem.Models
     {
         public int UserID { get; set; }
         public string UserName { get; set; }
-        public User(){}
+        public bool IsLoggedIn { get; set; }
+        public bool IsActive { get; set; }
+
+        public User()
+        {
+        }
         public User(int userID, string userName)
         {
             this.UserID = userID;

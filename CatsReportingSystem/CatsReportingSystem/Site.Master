@@ -37,7 +37,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
+ 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -51,12 +51,35 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/User/User">User</a></li>
+                        <li><a runat="server" href="~/Client/Client">Client</a></li>
+                        <li><a runat="server" href="~/Admin/Admin">Admin</a></li>
                     </ul>
-                    <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server" />!</p>
+                    <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search"></span></button>
+                    <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server"/>! </p>
                 </div>
             </div>
+        </div>
+        <br />
+        <div>
+            ClientID:
+            <asp:TextBox ID="txtClientID" runat="server" placeholder="ClientID:"></asp:TextBox>
+        </div>
+        <div>
+            SIN:
+            <asp:TextBox ID="txtSIN" runat="server" placeholder="SIN:"></asp:TextBox>
+        </div>
+        <div>
+            First Name:
+            <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name:"></asp:TextBox>
+        </div>
+        <div>
+            Last Name:
+            <asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name:"></asp:TextBox>
+        </div>
+        <div>
+            Date of Birth:
+            <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Date of Birth:"></asp:TextBox>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
