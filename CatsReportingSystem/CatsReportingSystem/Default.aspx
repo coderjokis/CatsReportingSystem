@@ -36,6 +36,7 @@
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+            
             <asp:GridView ID="gvClientSearch" runat="server" AllowPaging="True" AutoGenerateColumns="False" AlternatingRowStyle-BackColor="Yellow" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White"></AlternatingRowStyle>
                 <Columns>

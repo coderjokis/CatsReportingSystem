@@ -9,26 +9,26 @@ namespace CatsReportingSystem.Models
 {
     public class Client
     {
-        public int ClientID { get; set; }
+        public string ClientID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int SIN { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool Status { get; set; }
+        public string SIN { get; set; }
+        public string DateOfBirth { get; set; }
+        public Client()
+        {
 
-        public Client(int clientID, string firstName, string lastName, int sIN, DateTime dateOfBirth, bool isActive)
+        }
+        public Client(string clientID, string firstName, string lastName, string sIN, string dateOfBirth)
         {
             this.ClientID = clientID;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.SIN = sIN;
             this.DateOfBirth = dateOfBirth;
-            this.Status = isActive;
         }
         public void ClientSearch()
         {
-            DAL myDal = new DAL();
-            DataSet ds = myDal.ExecuteProcedure("spGetClientBySearch");
+            
         }
     }
 }

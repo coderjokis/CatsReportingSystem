@@ -13,7 +13,6 @@ namespace CatsReportingSystem
 {
     public partial class _Default : Page
     {
-        DAL myDal = new DAL();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -26,7 +25,9 @@ namespace CatsReportingSystem
 
         private void SearchBind()
         {
+            DAL myDal = new DAL();
             myDal.AddParam("ID", txtClientID.Text);
+            myDal.AddParam("SIN", txtSIN.Text);
             myDal.AddParam("FirstName", txtFirstName.Text);
             myDal.AddParam("LastName", txtLastName.Text);
             myDal.AddParam("DOB", txtDateofBirth.Text);
@@ -34,6 +35,7 @@ namespace CatsReportingSystem
             ds = myDal.ExecuteProcedure("spGetClientBySearch");
             gvClientSearch.DataSource = ds;
             gvClientSearch.DataBind();
+            
         }
 
 

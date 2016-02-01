@@ -30,4 +30,4 @@ as begin
 end
 go
 
-exec spGetClientBySearch @FirstName='n'
+exec spGetClientBySearch @FirstName='doug'

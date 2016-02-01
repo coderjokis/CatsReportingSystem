@@ -164,6 +164,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ClientHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Install.sql" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
@@ -233,6 +234,9 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ClientHandler.ashx.cs">
+      <DependentUpon>ClientHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Client\Client.aspx.cs">
       <DependentUpon>Client.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
