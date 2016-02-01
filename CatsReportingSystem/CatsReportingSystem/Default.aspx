@@ -65,4 +65,24 @@
             </div>
         </div>
     </div>
+    <div>
+            ClientID:
+            <asp:TextBox ID="txtClientID" runat="server" placeholder="ClientID:"></asp:TextBox>
+        </div>
+        <div>
+            SIN:
+            <asp:TextBox ID="txtSIN" runat="server" placeholder="SIN:"></asp:TextBox>
+        </div>
+        <div>
+            First Name:
+            <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name:"></asp:TextBox>
+        </div>
+        <div>
+            Last Name:
+            <asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name:"></asp:TextBox>
+        </div>
+        <div>
+            Date of Birth:
+            <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Date of Birth:"></asp:TextBox>
+        </div>
 </asp:Content>
