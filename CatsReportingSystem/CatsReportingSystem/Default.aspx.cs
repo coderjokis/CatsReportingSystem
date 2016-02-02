@@ -34,11 +34,10 @@ namespace CatsReportingSystem
             DataSet ds = new DataSet();
             ds = myDal.ExecuteProcedure("spGetClientBySearch");
             gvClientSearch.DataSource = ds;
+            
             gvClientSearch.DataBind();
             
         }
-
-
         //private void Loadtext()
         //{
         //    string userName = HttpContext.Current.User.Identity.Name;

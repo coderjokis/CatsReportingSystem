@@ -7,13 +7,13 @@
 
             <div class="input-group">
                 <span class="input-group-addon">Client ID:</span>
-                <asp:TextBox ID="txtClientID" runat="server" placeholder="ClientID:" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtClientID" runat="server" placeholder="ClientID:" CssClass="form-control" TextMode="Number"></asp:TextBox>
 
             </div>
 
             <div class="input-group">
                 <span class="input-group-addon">SIN:</span>
-                <asp:TextBox ID="txtSIN" runat="server" placeholder="SIN:" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtSIN" runat="server" placeholder="SIN:" CssClass="form-control" TextMode="Number"></asp:TextBox>
             </div>
 
             <div class="input-group">
@@ -28,7 +28,7 @@
 
             <div class="input-group">
                 <span class="input-group-addon">DOB:</span>
-                <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Date of Birth:" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Date of Birth:" CssClass="form-control" TextMode="Date"></asp:TextBox>
             </div>
             <div>
                 <asp:Button ID="btnSearch" Text="Search" runat="server" OnClick="btnSearch_Click" CssClass="btn btn-primary btn-lg" />

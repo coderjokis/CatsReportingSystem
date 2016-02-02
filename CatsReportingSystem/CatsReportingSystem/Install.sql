@@ -15,19 +15,37 @@ go
 alter procedure spGetClientBySearch
 (
 @ID int = null,
-@SIN varchar = null,
+@SIN varchar(max) = null,
 @FirstName varchar(max) = null,
 @LastName varchar(max) = null,
 @DOB date =null
 )
 as begin
-	select ID,SIN,FirstName,LastName,DOB from Clients
+	if exists
+	(select ID,SIN,FirstName,LastName,DOB from Clients
 	where  (ID =@ID) or
-		(SIN Like '%' +@SIN+ '%') or
+		(SIN =@SIN) or
 		 (FirstName like '%' +@FirstName+ '%') or
 		 (LastName like '%' +@LastName+ '%') or
-		 (DOB = @DOB)
+		 (DOB = @DOB))
+		 begin
+			select ID,SIN,FirstName,LastName,DOB from Clients
+			where  (ID =@ID)
+		 end
+	if @@ROWCOUNT = 0
+		begin
+			select 'No Result Found!' as result
+		end
 end
 go
 
-exec spGetClientBySearch @FirstName='doug'
+exec spGetClientBySearch @FirstName='ret'
+exec spGetClientBySearch @SIN=' '
+exec spGetClientBySearch @LastName='Dou'
+exec spGetClientBySearch @DOB='1970'
+exec spGetClientBySearch @ID='32156'
+exec spGetClientBySearch @FirstName=' '
+exec spGetClientBySearch @SIN='540'
+exec spGetClientBySearch @LastName='dfsfer'
+exec spGetClientBySearch @DOB='4214'
+exec spGetClientBySearch @ID='NULL'
