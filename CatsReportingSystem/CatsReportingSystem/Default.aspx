@@ -5,39 +5,41 @@
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <h2>Search Client</h2>
 
-            <div class="input-group">
+            <div class="input-group padBot">
                 <span class="input-group-addon">Client ID:</span>
                 <asp:TextBox ID="txtClientID" runat="server" placeholder="ClientID:" CssClass="form-control" TextMode="Number"></asp:TextBox>
 
             </div>
 
-            <div class="input-group">
+            <div class="input-group padBot">
                 <span class="input-group-addon">SIN:</span>
                 <asp:TextBox ID="txtSIN" runat="server" placeholder="SIN:" CssClass="form-control" TextMode="Number"></asp:TextBox>
             </div>
 
-            <div class="input-group">
+            <div class="input-group padBot">
                 <span class="input-group-addon">First Name:</span>
                 <asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name:" CssClass="form-control"></asp:TextBox>
             </div>
 
-            <div class="input-group">
+            <div class="input-group padBot">
                 <span class="input-group-addon">Last Name:</span>
                 <asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name:" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="input-group">
-                <span class="input-group-addon">DOB:</span>
-                <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Date of Birth:" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <span class="input-group-addon">Birth Year:</span>
+                <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Year of Birth:" CssClass="form-control" TextMode="Number"></asp:TextBox>
             </div>
-            <div>
-                <asp:Button ID="btnSearch" Text="Search" runat="server" OnClick="btnSearch_Click" CssClass="btn btn-primary btn-lg" />
+            <asp:RegularExpressionValidator ID="rgxYear" runat="server" ControlToValidate="txtDateofBirth" ValidationExpression="^(19|20)\d{2}$" ErrorMessage="Enter a Valid Year"></asp:RegularExpressionValidator>
+            <div class="input-group">
+                <asp:Button ID="btnSearch" Text="Search" runat="server" OnClick="btnSearch_Click" CssClass="btn btn-primary" />
             </div>
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-            
-            <asp:GridView ID="gvClientSearch" runat="server" AllowPaging="True" AutoGenerateColumns="False" AlternatingRowStyle-BackColor="Yellow" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <h4>
+                <asp:Label ID="lblSearchResult" runat="server" Visible="false" /></h4>
+            <asp:GridView ID="gvClientSearch" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="gvClientSearch_PageIndexChanging" AlternatingRowStyle-BackColor="Yellow" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White"></AlternatingRowStyle>
                 <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ClientID" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">

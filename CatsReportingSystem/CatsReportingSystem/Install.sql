@@ -30,7 +30,11 @@ as begin
 		 (DOB = @DOB))
 		 begin
 			select ID,SIN,FirstName,LastName,DOB from Clients
-			where  (ID =@ID)
+			where  (ID =@ID) or
+				(SIN =@SIN) or
+				(FirstName like '%' +@FirstName+ '%') or
+				(LastName like '%' +@LastName+ '%') or
+				(DOB = @DOB)
 		 end
 	if @@ROWCOUNT = 0
 		begin
@@ -39,7 +43,7 @@ as begin
 end
 go
 
-exec spGetClientBySearch @FirstName='ret'
+exec spGetClientBySearch @FirstName='meg'
 exec spGetClientBySearch @SIN=' '
 exec spGetClientBySearch @LastName='Dou'
 exec spGetClientBySearch @DOB='1970'
