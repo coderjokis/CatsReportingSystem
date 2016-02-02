@@ -20,5 +20,7 @@
         Date of Birth:
         <asp:TextBox ID="txtDateofBirth" runat="server" placeholder="Enter Date Of Birth"></asp:TextBox>
     </div>
-    <asp:Button ID="btnUpdate" runat="server" Text="Update Client" />
+    <asp:Button ID="btnUpdate" runat="server" Text="Update Client" OnClick="btnUpdate_Click" />
+    <br />
+    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
 </asp:Content>
