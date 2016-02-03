@@ -12,6 +12,8 @@ go
 exec spGetUser
 go
 --proc for search clients in home page--
+
+
 alter procedure spGetClientBySearch
 (
 @ID int = null,

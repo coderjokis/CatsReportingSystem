@@ -85,12 +85,12 @@ namespace CatsReportingSystem {
         protected global::System.Web.UI.WebControls.Label lblSearchResult;
         
         /// <summary>
-        /// gvClientSearch control.
+        /// lvClientSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvClientSearch;
+        protected global::System.Web.UI.WebControls.ListView lvClientSearch;
     }
 }

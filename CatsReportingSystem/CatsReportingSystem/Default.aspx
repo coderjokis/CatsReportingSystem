@@ -39,35 +39,47 @@
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
             <h4>
                 <asp:Label ID="lblSearchResult" runat="server" Visible="false" /></h4>
-            <asp:GridView ID="gvClientSearch" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="gvClientSearch_PageIndexChanging" AlternatingRowStyle-BackColor="Yellow" CellPadding="4" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White"></AlternatingRowStyle>
-                <Columns>
-                    <asp:BoundField DataField="ID" HeaderText="ClientID" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">
-                        <HeaderStyle BackColor="Black" ForeColor="White"></HeaderStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="SIN" HeaderText="S.I.N." HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">
-                        <HeaderStyle BackColor="Black" ForeColor="White"></HeaderStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="FirstName" HeaderText="First Name" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">
-                        <HeaderStyle BackColor="Black" ForeColor="White"></HeaderStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="LastName" HeaderText="LastName" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">
-                        <HeaderStyle BackColor="Black" ForeColor="White"></HeaderStyle>
-                    </asp:BoundField>
-                    <asp:BoundField DataField="DOB" HeaderText="Date Of Birth" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White">
-                        <HeaderStyle BackColor="Black" ForeColor="White"></HeaderStyle>
-                    </asp:BoundField>
-                </Columns>
-                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
-                <SortedAscendingCellStyle BackColor="#FDF5AC" />
-                <SortedAscendingHeaderStyle BackColor="#4D0000" />
-                <SortedDescendingCellStyle BackColor="#FCF6C0" />
-                <SortedDescendingHeaderStyle BackColor="#820000" />
-            </asp:GridView>
+            <div>
+                <asp:ListView ID="lvClientSearch" runat="server" OnPagePropertiesChanging="lvClientSearch_PagePropertiesChanging" OnSorting="lvClientSearch_Sorting">
+                    <LayoutTemplate>
+                        <table class="table">
+                            <thead runat="server" visible='<%# (int)DataBinder.Eval(Container,"DataItemIndex")==0 %>'>
+                                <th><asp:LinkButton ID="lbClientIDSort" Text="ClientID" runat="server" CommandName="sort" CommandArgument="ID" /></th>
+                                <th><asp:LinkButton ID="lbSinSort" Text="SIN Number" runat="server" CommandName="sort" CommandArgument="SIN" /></th>
+                                <th>
+                                    <asp:LinkButton ID="lbFirstNameSort" Text="First Name" runat="server" CommandName="sort" CommandArgument="FirstName" /></th>
+                                <th>
+                                    <asp:LinkButton ID="lbLastNameSort" Text="Last Name" runat="server" CommandName="sort" CommandArgument="LastName" /></th>
+                                <th><asp:LinkButton ID="lbDobSort" Text="Date of Birth" runat="server" CommandName="sort" CommandArgument="DOB" /></th>
+                            </thead>
+                            <asp:PlaceHolder runat="server" ID="itemPlaceHolder" />
+                            <tr>
+                                <td>
+                                    <asp:DataPager runat="server" ID="dpClientSearch" PagedControlID="lvClientSearch" PageSize="10">
+                                        <Fields >
+                                            <asp:NextPreviousPagerField ButtonType="Link" ShowFirstPageButton="false" ShowPreviousPageButton="true" ShowNextPageButton="false" ButtonCssClass="previous"  />
+                                            <asp:NumericPagerField ButtonType="Link" CurrentPageLabelCssClass="active"/>
+                                            <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" ButtonCssClass="next" />
+                                        </Fields>
+                                    </asp:DataPager>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <div class="col-lg-12 col-md-12">
+                            <tr>
+                                <td><%#Eval("ID") %></td>
+                                <td><%#Eval("SIN") %></td>
+                                <td><%#Eval("FirstName") %></td>
+                                <td><%#Eval("LastName") %></td>
+                                <td><%#Eval("DOB","{0:dd/MM/yyyy}")%></td>
+                            </tr>
+                        </div>
+                    </ItemTemplate>
+                </asp:ListView>
+            </div>
         </div>
     </div>
 
