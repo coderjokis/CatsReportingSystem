@@ -14,16 +14,30 @@ namespace CatsReportingSystem
 {
     public partial class _Default : Page
     {
+        //    string userName = HttpContext.Current.User.Identity.Name;
         DAL myDal = new DAL();
         DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        string sortExpression;
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+        }
 
+        private void BindContacts(string sortExpression)
+        {
+            sortExpression = sortExpression.Replace("Ascending", "ASC");
+            sortExpression = sortExpression.Replace("Descending", "DESC");
+            ParamCheck();
+            SearchBind();
+            
+            LoadDLClientSearch();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             lblSearchResult.Visible = false;
+            ParamCheck();
             SearchBind();
         }
 
@@ -54,8 +68,6 @@ namespace CatsReportingSystem
 
         private void SearchBind()
         {
-            ParamCheck();
-            
             ds = myDal.ExecuteProcedure("spGetClientBySearch");
 
             if (ds.Tables[0].Rows.Count > 1)
@@ -71,16 +83,22 @@ namespace CatsReportingSystem
 
         private void LoadDLClientSearch()
         {
-            lvClientSearch.DataSource = ds;
+            dt.DefaultView.Sort = sortExpression;
+            dt = ds.Tables[0];
+            lvClientSearch.DataSource = dt;
             lvClientSearch.DataBind();
         }
 
         protected void lvClientSearch_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             (lvClientSearch.FindControl("dpClientSearch") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-            this.SearchBind();
+            ParamCheck();
+            SearchBind();
+            LoadDLClientSearch();
+
         }
-        protected SortDirection ListViewSortDirection
+
+    protected SortDirection ListViewSortDirection
         {
             get
             {
@@ -93,25 +111,15 @@ namespace CatsReportingSystem
 
         protected void lvClientSearch_Sorting(object sender, ListViewSortEventArgs e)
         {
-            BindContracts(e.SortExpression + " " + ListViewSortDirection.ToString());
+            BindContacts(e.SortExpression + " " + ListViewSortDirection.ToString());
+
+            //string imgUrl; i do not know if you have use
             if (ListViewSortDirection == SortDirection.Ascending)
-                ListViewSortDirection = SortDirection.Ascending;
-            else
                 ListViewSortDirection = SortDirection.Descending;
+            else
+                ListViewSortDirection = SortDirection.Ascending;
+
         }
 
-        private void BindContracts(string sortExpression)
-        {
-            sortExpression = sortExpression.Replace("Ascending", "ASC");
-            sortExpression = sortExpression.Replace("Decending", "DESC");
-            
-            
-            LoadDLClientSearch();
-        }
-
-        //private void Loadtext()
-        //{
-        //    string userName = HttpContext.Current.User.Identity.Name;
-        //}
     }
 }

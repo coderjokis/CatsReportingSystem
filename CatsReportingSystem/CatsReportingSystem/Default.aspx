@@ -44,13 +44,13 @@
                     <LayoutTemplate>
                         <table class="table">
                             <thead runat="server" visible='<%# (int)DataBinder.Eval(Container,"DataItemIndex")==0 %>'>
-                                <th>Client ID</th>
-                                <th>SIN Number</th>
+                                <th><asp:LinkButton ID="lbClientIDSort" Text="ClientID" runat="server" CommandName="sort" CommandArgument="ID" /></th>
+                                <th><asp:LinkButton ID="lbSinSort" Text="SIN Number" runat="server" CommandName="sort" CommandArgument="SIN" /></th>
                                 <th>
                                     <asp:LinkButton ID="lbFirstNameSort" Text="First Name" runat="server" CommandName="sort" CommandArgument="FirstName" /></th>
                                 <th>
                                     <asp:LinkButton ID="lbLastNameSort" Text="Last Name" runat="server" CommandName="sort" CommandArgument="LastName" /></th>
-                                <th>Date of Birth</th>
+                                <th><asp:LinkButton ID="lbDobSort" Text="Date of Birth" runat="server" CommandName="sort" CommandArgument="DOB" /></th>
                             </thead>
                             <asp:PlaceHolder runat="server" ID="itemPlaceHolder" />
                             <tr>
@@ -58,7 +58,7 @@
                                     <asp:DataPager runat="server" ID="dpClientSearch" PagedControlID="lvClientSearch" PageSize="10">
                                         <Fields >
                                             <asp:NextPreviousPagerField ButtonType="Link" ShowFirstPageButton="false" ShowPreviousPageButton="true" ShowNextPageButton="false" ButtonCssClass="previous"  />
-                                            <asp:NumericPagerField ButtonType="Link" CurrentPageLabelCssClass="active"  />
+                                            <asp:NumericPagerField ButtonType="Link" CurrentPageLabelCssClass="active"/>
                                             <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" ButtonCssClass="next" />
                                         </Fields>
                                     </asp:DataPager>
@@ -74,7 +74,7 @@
                                 <td><%#Eval("SIN") %></td>
                                 <td><%#Eval("FirstName") %></td>
                                 <td><%#Eval("LastName") %></td>
-                                <td><%#Eval("DOB") %></td>
+                                <td><%#Eval("DOB","{0:dd/MM/yyyy}")%></td>
                             </tr>
                         </div>
                     </ItemTemplate>
