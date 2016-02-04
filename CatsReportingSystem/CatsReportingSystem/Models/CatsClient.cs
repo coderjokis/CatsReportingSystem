@@ -7,28 +7,27 @@ using System.Data;
 
 namespace CatsReportingSystem.Models
 {
-    public class Client
+    public class CatsClient
     {
-        public string ClientID { get; set; }
+        public string ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SIN { get; set; }
-        public string DateOfBirth { get; set; }
-        public Client()
+        public string DOB { get; set; }
+        public bool Lock { get; set; }
+        public CatsClient()
         {
 
         }
-        public Client(string clientID, string firstName, string lastName, string sIN, string dateOfBirth)
+        public CatsClient(string clientID, string firstName, string lastName, string sIN, string dateOfBirth, bool locked) :base()
         {
-            this.ClientID = clientID;
+            this.ID = clientID;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.SIN = sIN;
-            this.DateOfBirth = dateOfBirth;
+            this.DOB = dateOfBirth;
+            this.Lock=locked;
         }
-        public void ClientSearch()
-        {
-            
-        }
+       
     }
 }
