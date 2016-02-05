@@ -84,7 +84,15 @@
                                 <td><%#Eval("LastName")%></td>
                                 <td><%#Eval("FirstName")%></td>
                                 <td><%#Eval("DOB")%></td>
-                                <td><%#Eval("Lock") %></td>
+                               <td><%#Eval("Lock") %></td>
+                                <%--<td><image id="imgLock" src="images/Padlock.ico" height="24px;" visibility='<%#Eval("Lock").Val == 1 ? "hidden" : "visible" %>'></image></td>--%>
+                                <%--<td><asp:Image ID="imgLock" runat="server" ImageUrl="images/Padlock.ico"--%> 
+                                       <%--Visible='<%#(Eval("Lock")!=null && (bool)Eval("Lock")) ? true : false %>' Height="24px" /></td>--%>
+                                <%--<td><span class="glyphicon glyphicon-lock"></span></td>
+                                <%--<td><%#Eval("Lock")!=null &&(bool)Eval("Lock") ? " ":"&lt;span class=&#34;glyphicon glyphicon-lock;&#34;&gt;&lt;/span&gt;" %></td>--%>
+                                <%--<td><%#Eval("Lock")!=null &&(bool)Eval("Lock") ? " ": "&lt;span class=&#34;glyphicon glyphicon-lock;&#34;&gt;&lt;&#47span&gt;" %></td>--%>
+
+                            <%--!=null &&(bool)Eval("Lock")? "glyphicon glyphicon-lock;" : "display:none;"%>"></span></td>--%>
                             </tr>
                         </div>
                     </ItemTemplate>

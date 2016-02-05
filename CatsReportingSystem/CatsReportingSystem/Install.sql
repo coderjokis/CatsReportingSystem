@@ -53,9 +53,9 @@ as begin
 end
 go
 
-exec spGetClientBySearch @FirstName='meg'
+exec spGetClientBySearch @FirstName='col'
 exec spGetClientBySearch @SIN=' '
-exec spGetClientBySearch @LastName='Dou'
+exec spGetClientBySearch @LastName='Doe'
 exec spGetClientBySearch @DOB='1970'
 exec spGetClientBySearch @ID='32156'
 exec spGetClientBySearch @FirstName=' '

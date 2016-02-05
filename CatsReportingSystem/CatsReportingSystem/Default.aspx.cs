@@ -17,9 +17,11 @@ namespace CatsReportingSystem
     {
         //    string userName = HttpContext.Current.User.Identity.Name;
         DAL myDal = new DAL();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
+        DataSet dsResult; /*= new DataSet();*/
+        //DataTable dt = new DataTable();
         SearchList sl = new SearchList();
+        string _searchParam;
+        string _myDalParam;
         //CatsClient client;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,46 +38,52 @@ namespace CatsReportingSystem
             SearchBind();
         }
 
-        private void ParamCheck()
+        private string ParamCheck()
         {
             if (txtClientID.Text != "")
             {
-                myDal.AddParam("ID", txtClientID.Text);
-                //sl.AddSearchParam("ID", txtClientID.Text);
+                //myDal.AddParam("ID", txtClientID.Text);
+                _searchParam = txtClientID.Text;
+                _myDalParam = "ID";
             }
             if (txtSIN.Text != "")
             {
-                myDal.AddParam("SIN", txtSIN.Text);
-                //sl.AddSearchParam("SIN", txtSIN.Text);
+                // myDal.AddParam("SIN", txtSIN.Text);
+                _searchParam = txtSIN.Text;
+                _myDalParam = "SIN";
             }
             if (txtFirstName.Text != "")
             {
-                myDal.AddParam("FirstName", txtFirstName.Text);
-                //sl.AddSearchParam("FirstName", txtFirstName.Text);
+                // myDal.AddParam("FirstName", txtFirstName.Text);
+                _searchParam = txtFirstName.Text;
+                _myDalParam = "FirstName";
             }
             if (txtLastName.Text != "")
             {
-                myDal.AddParam("LastName", txtLastName.Text);
-                //sl.AddSearchParam("LastName", txtLastName.Text);
+                // myDal.AddParam("LastName", txtLastName.Text);
+                _searchParam = txtLastName.Text;
+                _myDalParam = "LastName";
             }
             if (txtDateofBirth.Text != "")
             {
-                myDal.AddParam("DOB", txtDateofBirth.Text);
-                //sl.AddSearchParam("DOB", txtDateofBirth.Text);
+                // myDal.AddParam("DOB", txtDateofBirth.Text);
+                _searchParam = txtDateofBirth.Text;
+                _myDalParam = "DOB";
             }
 
-
+            return _searchParam;
         }
 
         private void SearchBind()
         {
-            ds = myDal.ExecuteProcedure("spGetClientBySearch");
+            myDal.AddParam(_myDalParam, _searchParam);
+            dsResult = myDal.ExecuteProcedure("spGetClientBySearch");
 
-            if (ds.Tables[0].Rows.Count > 1)
+            if (dsResult.Tables[0].Rows.Count > 1)
             {
                 LoadDLClientSearch();
-                
-
+                lblSearchResult.Visible = true;
+                lblSearchResult.Text = dsResult.Tables[0].Rows.Count + " Results Found.";
             }
             else
             {
@@ -86,14 +94,7 @@ namespace CatsReportingSystem
 
         private void LoadDLClientSearch()
         {
-            var myData = ds.Tables[0].AsEnumerable().Select(r => new CatsClient { ID = r.Field<int>("ID").ToString(),
-                SIN = r.Field<string>("SIN"),
-                FirstName = r.Field<string>("FirstName"),
-                LastName = r.Field<string>("LastName"),
-                DOB = r.Field<DateTime>("DOB").ToString("dd/MM/yyyy"),
-                Lock = r.Field<>("Lock").ToString(),
-            });
-            sl.SResult = myData.ToList();
+            sl.getSearchResult(dsResult);
             BindData();
 
         }

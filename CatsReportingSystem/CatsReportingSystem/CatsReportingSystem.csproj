@@ -150,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -167,6 +166,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="ClientHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\Padlock.ico" />
     <Content Include="Install.sql" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
