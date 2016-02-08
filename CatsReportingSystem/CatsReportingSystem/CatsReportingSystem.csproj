@@ -166,6 +166,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="ClientHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\Padlock.ico" />
     <Content Include="Install.sql" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -265,7 +266,8 @@
     </Compile>
     <Compile Include="Logics\RoleActions.cs" />
     <Compile Include="Models\Admin.cs" />
-    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\CatsClient.cs" />
+    <Compile Include="Models\SearchList.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

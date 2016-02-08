@@ -9,81 +9,81 @@ namespace CatsReportingSystem.Controllers
 {
     public class LdapAuthentication
     {
-        private string _path;
-        private string _filterAttribute;
-        string DomainAndUsername = HttpContext.Current.User.Identity.Name;
-        private string username;
+        //    private string _path;
+        //    private string _filterAttribute;
+        //    string DomainAndUsername = HttpContext.Current.User.Identity.Name;
+        //    private string username;
 
-        public LdapAuthentication(string path)
-        {
-            _path = path;
-        }
+        //    public LdapAuthentication(string path)
+        //    {
+        //        _path = path;
+        //    }
 
-        public bool IsAuthenticated(string domainAndUsername, string pwd)
-        {
-            
-            DirectoryEntry entry = new DirectoryEntry(_path, DomainAndUsername, pwd);
+        //    public bool IsAuthenticated(string domainAndUsername, string pwd)
+        //    {
 
-            try
-            {
-                //Bind to the native AdsObject to force authentication.
-                object obj = entry.NativeObject;
+        //        DirectoryEntry entry = new DirectoryEntry(_path, DomainAndUsername, pwd);
 
-                DirectorySearcher search = new DirectorySearcher(entry);
+        //        try
+        //        {
+        //            //Bind to the native AdsObject to force authentication.
+        //            object obj = entry.NativeObject;
 
-                search.Filter = "(SAMAccountName=" + username + ")";
-                search.PropertiesToLoad.Add("cn");
-                SearchResult result = search.FindOne();
+        //            DirectorySearcher search = new DirectorySearcher(entry);
 
-                if (null == result)
-                {
-                    return false;
-                }
+        //            search.Filter = "(SAMAccountName=" + username + ")";
+        //            search.PropertiesToLoad.Add("cn");
+        //            SearchResult result = search.FindOne();
 
-                //Update the new path to the user in the directory.
-                _path = result.Path;
-                _filterAttribute = (string)result.Properties["cn"][0];
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error authenticating user. " + ex.Message);
-            }
+        //            if (null == result)
+        //            {
+        //                return false;
+        //            }
 
-            return true;
-        }
+        //            //Update the new path to the user in the directory.
+        //            _path = result.Path;
+        //            _filterAttribute = (string)result.Properties["cn"][0];
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Error authenticating user. " + ex.Message);
+        //        }
 
-        public string GetGroups()
-        {
-            DirectorySearcher search = new DirectorySearcher(_path);
-            search.Filter = "(cn=" + _filterAttribute + ")";
-            search.PropertiesToLoad.Add("memberOf");
-            StringBuilder groupNames = new StringBuilder();
+        //        return true;
+        //    }
 
-            try
-            {
-                SearchResult result = search.FindOne();
-                int propertyCount = result.Properties["memberOf"].Count;
-                string dn;
-                int equalsIndex, commaIndex;
+        //    public string GetGroups()
+        //    {
+        //        DirectorySearcher search = new DirectorySearcher(_path);
+        //        search.Filter = "(cn=" + _filterAttribute + ")";
+        //        search.PropertiesToLoad.Add("memberOf");
+        //        StringBuilder groupNames = new StringBuilder();
 
-                for (int propertyCounter = 0; propertyCounter < propertyCount; propertyCounter++)
-                {
-                    dn = (string)result.Properties["memberOf"][propertyCounter];
-                    equalsIndex = dn.IndexOf("=", 1);
-                    commaIndex = dn.IndexOf(",", 1);
-                    if (-1 == equalsIndex)
-                    {
-                        return null;
-                    }
-                    groupNames.Append(dn.Substring((equalsIndex + 1), (commaIndex - equalsIndex) - 1));
-                    groupNames.Append("|");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error obtaining group names. " + ex.Message);
-            }
-            return groupNames.ToString();
-        }
+        //        try
+        //        {
+        //            SearchResult result = search.FindOne();
+        //            int propertyCount = result.Properties["memberOf"].Count;
+        //            string dn;
+        //            int equalsIndex, commaIndex;
+
+        //            for (int propertyCounter = 0; propertyCounter < propertyCount; propertyCounter++)
+        //            {
+        //                dn = (string)result.Properties["memberOf"][propertyCounter];
+        //                equalsIndex = dn.IndexOf("=", 1);
+        //                commaIndex = dn.IndexOf(",", 1);
+        //                if (-1 == equalsIndex)
+        //                {
+        //                    return null;
+        //                }
+        //                groupNames.Append(dn.Substring((equalsIndex + 1), (commaIndex - equalsIndex) - 1));
+        //                groupNames.Append("|");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Error obtaining group names. " + ex.Message);
+        //        }
+        //        return groupNames.ToString();
+        //    }
     }
 }

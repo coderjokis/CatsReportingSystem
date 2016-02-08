@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
+using CatsReportingSystem.Models;
 
 namespace CatsReportingSystem
 {
@@ -16,22 +17,18 @@ namespace CatsReportingSystem
     {
         //    string userName = HttpContext.Current.User.Identity.Name;
         DAL myDal = new DAL();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        string sortExpression;
+        DataSet dsResult; /*= new DataSet();*/
+        //DataTable dt = new DataTable();
+        SearchList sl = new SearchList();
+        string _searchParam;
+        string _myDalParam;
+        //CatsClient client;
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-        }
-
-        private void BindContacts(string sortExpression)
-        {
-            sortExpression = sortExpression.Replace("Ascending", "ASC");
-            sortExpression = sortExpression.Replace("Descending", "DESC");
-            ParamCheck();
-            SearchBind();
-            
-            LoadDLClientSearch();
+            if (!IsPostBack)
+            {
+                Session["Column"] = "Column";
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -41,38 +38,52 @@ namespace CatsReportingSystem
             SearchBind();
         }
 
-        private void ParamCheck()
+        private string ParamCheck()
         {
             if (txtClientID.Text != "")
             {
-                myDal.AddParam("ID", txtClientID.Text);
+                //myDal.AddParam("ID", txtClientID.Text);
+                _searchParam = txtClientID.Text;
+                _myDalParam = "ID";
             }
             if (txtSIN.Text != "")
             {
-                myDal.AddParam("SIN", txtSIN.Text);
+                // myDal.AddParam("SIN", txtSIN.Text);
+                _searchParam = txtSIN.Text;
+                _myDalParam = "SIN";
             }
             if (txtFirstName.Text != "")
             {
-                myDal.AddParam("FirstName", txtFirstName.Text);
+                // myDal.AddParam("FirstName", txtFirstName.Text);
+                _searchParam = txtFirstName.Text;
+                _myDalParam = "FirstName";
             }
             if (txtLastName.Text != "")
             {
-                myDal.AddParam("LastName", txtLastName.Text);
+                // myDal.AddParam("LastName", txtLastName.Text);
+                _searchParam = txtLastName.Text;
+                _myDalParam = "LastName";
             }
             if (txtDateofBirth.Text != "")
             {
-                myDal.AddParam("DOB", txtDateofBirth.Text);
+                // myDal.AddParam("DOB", txtDateofBirth.Text);
+                _searchParam = txtDateofBirth.Text;
+                _myDalParam = "DOB";
             }
 
+            return _searchParam;
         }
 
         private void SearchBind()
         {
-            ds = myDal.ExecuteProcedure("spGetClientBySearch");
+            myDal.AddParam(_myDalParam, _searchParam);
+            dsResult = myDal.ExecuteProcedure("spGetClientBySearch");
 
-            if (ds.Tables[0].Rows.Count > 1)
+            if (dsResult.Tables[0].Rows.Count > 1)
             {
                 LoadDLClientSearch();
+                lblSearchResult.Visible = true;
+                lblSearchResult.Text = dsResult.Tables[0].Rows.Count + " Results Found.";
             }
             else
             {
@@ -83,42 +94,38 @@ namespace CatsReportingSystem
 
         private void LoadDLClientSearch()
         {
-            dt.DefaultView.Sort = sortExpression;
-            dt = ds.Tables[0];
-            lvClientSearch.DataSource = dt;
+            sl.getSearchResult(dsResult);
+            BindData();
+
+        }
+        private void BindData()
+        {
+            lvClientSearch.DataSource = sl.SResult;
             lvClientSearch.DataBind();
         }
 
         protected void lvClientSearch_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
+            
             (lvClientSearch.FindControl("dpClientSearch") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-            ParamCheck();
-            SearchBind();
-            LoadDLClientSearch();
+            //BindData(); -- this event cant run w/out full get.
+            this.ExecLoadMethods();
+            base.OnPreRender(e);
 
-        }
-
-    protected SortDirection ListViewSortDirection
-        {
-            get
-            {
-                if (ViewState["sortDirection"] == null)
-                    ViewState["sortDirection"] = SortDirection.Ascending;
-                return (SortDirection)ViewState["sortDirection"];
-            }
-            set { ViewState["sortDirection"] = value; }
         }
 
         protected void lvClientSearch_Sorting(object sender, ListViewSortEventArgs e)
         {
-            BindContacts(e.SortExpression + " " + ListViewSortDirection.ToString());
+            Session["Column"] = e.SortExpression;
+            myDal.AddParam("Column", Session["Column"].ToString());
+            ExecLoadMethods();
+        }
 
-            //string imgUrl; i do not know if you have use
-            if (ListViewSortDirection == SortDirection.Ascending)
-                ListViewSortDirection = SortDirection.Descending;
-            else
-                ListViewSortDirection = SortDirection.Ascending;
-
+        private void ExecLoadMethods()
+        {
+            ParamCheck();
+            SearchBind();
+            BindData();
         }
 
     }

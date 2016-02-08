@@ -20,7 +20,9 @@ alter procedure spGetClientBySearch
 @SIN varchar(max) = null,
 @FirstName varchar(max) = null,
 @LastName varchar(max) = null,
-@DOB date =null
+@DOB date =null,
+@Column varchar(max)=null,
+@Lock bit =null
 )
 as begin
 	if exists
@@ -31,12 +33,18 @@ as begin
 		 (LastName like '%' +@LastName+ '%') or
 		 (DOB = @DOB))
 		 begin
-			select ID,SIN,FirstName,LastName,DOB from Clients
+			select ID,SIN,FirstName,LastName,DOB,Lock from Clients
 			where  (ID =@ID) or
 				(SIN =@SIN) or
 				(FirstName like '%' +@FirstName+ '%') or
 				(LastName like '%' +@LastName+ '%') or
 				(DOB = @DOB)
+			order by 
+				CASE WHEN @Column = 'ID' THEN ID END,
+				CASE WHEN @Column = 'SIN' THEN SIN END,
+				CASE WHEN @Column = 'FirstName' THEN FirstName END,
+				CASE WHEN @Column = 'LastName' THEN LastName END,
+				CASE WHEN @Column = 'DOB' THEN DOB END
 		 end
 	if @@ROWCOUNT = 0
 		begin
@@ -45,9 +53,9 @@ as begin
 end
 go
 
-exec spGetClientBySearch @FirstName='meg'
+exec spGetClientBySearch @FirstName='col'
 exec spGetClientBySearch @SIN=' '
-exec spGetClientBySearch @LastName='Dou'
+exec spGetClientBySearch @LastName='Doe'
 exec spGetClientBySearch @DOB='1970'
 exec spGetClientBySearch @ID='32156'
 exec spGetClientBySearch @FirstName=' '
