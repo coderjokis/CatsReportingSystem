@@ -63,3 +63,19 @@ exec spGetClientBySearch @SIN='540'
 exec spGetClientBySearch @LastName='dfsfer'
 exec spGetClientBySearch @DOB='4214'
 exec spGetClientBySearch @ID='NULL'
+
+go
+--proc for updating users in admin page--
+
+alter procedure spUpdateUser
+(
+@UserID int = null,
+@UserName varchar(max) = null
+)
+as begin
+	update tblUsers set
+	UserName = @UserName
+	where UserID = @UserID
+end
+go
+
