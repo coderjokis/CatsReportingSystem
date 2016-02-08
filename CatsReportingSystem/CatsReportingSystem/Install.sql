@@ -33,7 +33,7 @@ as begin
 		 (LastName like '%' +@LastName+ '%') or
 		 (DOB = @DOB))
 		 begin
-			select ID,SIN,FirstName,LastName,DOB,Lock from Clients
+			select ID,SIN,FirstName,LastName,FORMAT(DOB,'dd MMMM yyyy') as DOB,Lock from Clients
 			where  (ID =@ID) or
 				(SIN =@SIN) or
 				(FirstName like '%' +@FirstName+ '%') or

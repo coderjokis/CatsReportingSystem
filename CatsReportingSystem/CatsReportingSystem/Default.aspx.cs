@@ -33,9 +33,17 @@ namespace CatsReportingSystem
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            lvClientSearch.Items.Clear();
             lblSearchResult.Visible = false;
             ParamCheck();
             SearchBind();
+            TestBindingToGV();
+        }
+
+        private void TestBindingToGV()
+        {
+            gvDatatest.DataSource = sl.SResult;
+            gvDatatest.DataBind();
         }
 
         private string ParamCheck()

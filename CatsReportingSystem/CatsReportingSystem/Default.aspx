@@ -83,11 +83,11 @@
                                 <td><%#Eval("SIN")%></td>
                                 <td><%#Eval("LastName")%></td>
                                 <td><%#Eval("FirstName")%></td>
-                                <td><%#Eval("DOB")%></td>
-                               <td><%#Eval("Lock") %></td>
+                                <td><%#Eval("DOB","{0:d/MM/yyyy}")%></td>
+                               <%--<td><%#Eval("Lock") %></td>--%>
                                 <%--<td><image id="imgLock" src="images/Padlock.ico" height="24px;" visibility='<%#Eval("Lock").Val == 1 ? "hidden" : "visible" %>'></image></td>--%>
-                                <%--<td><asp:Image ID="imgLock" runat="server" ImageUrl="images/Padlock.ico"--%> 
-                                       <%--Visible='<%#(Eval("Lock")!=null && (bool)Eval("Lock")) ? true : false %>' Height="24px" /></td>--%>
+                                <td><asp:Image ID="imgLock" runat="server" ImageUrl="images/Padlock.ico" 
+                                       Visible='<%#(Eval("Lock")!=null && (string)Eval("Lock")=="True") ? true : false %>' Height="24px" /></td>
                                 <%--<td><span class="glyphicon glyphicon-lock"></span></td>
                                 <%--<td><%#Eval("Lock")!=null &&(bool)Eval("Lock") ? " ":"&lt;span class=&#34;glyphicon glyphicon-lock;&#34;&gt;&lt;/span&gt;" %></td>--%>
                                 <%--<td><%#Eval("Lock")!=null &&(bool)Eval("Lock") ? " ": "&lt;span class=&#34;glyphicon glyphicon-lock;&#34;&gt;&lt;&#47span&gt;" %></td>--%>
@@ -99,6 +99,12 @@
                 </asp:ListView>
             </div>
         </div>
+        <asp:GridView ID="gvDatatest" runat="server" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="FirstName" HeaderText="Name" />
+                <asp:BoundField DataField="Lock" HeaderText="Lock"/>
+            </Columns>
+        </asp:GridView>
     </div>
 
 </asp:Content>

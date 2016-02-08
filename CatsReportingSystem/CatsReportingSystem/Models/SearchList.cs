@@ -30,7 +30,8 @@ namespace CatsReportingSystem.Models
                     dr["SIN"].ToString(),
                     dr["LastName"].ToString(),
                     dr["FirstName"].ToString(),
-                    dr["DOB"].ToString()
+                    dr["DOB"].ToString(),
+                    dr["Lock"].ToString()
                     ));
             }
             SResult.ToList();  
